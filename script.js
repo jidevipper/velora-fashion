@@ -204,7 +204,16 @@ function updateCart() {
 
         total += item.price;
 
-   cartItems.innerHTML += "<h2 style='color:red;'>TEST ITEM</h2>";
+   const itemDiv = document.createElement("div");
+
+itemDiv.className = "cart-item";
+
+itemDiv.innerHTML = `
+<h4>${item.name}</h4>
+<p>$${item.price}</p>
+`;
+
+cartItems.appendChild(itemDiv);
 
     });
 
