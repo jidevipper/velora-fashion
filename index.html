@@ -24,6 +24,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <header>
 
 <nav class="navbar">
@@ -52,23 +54,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <div class="nav-icons">
 
-    <div class="search-icon">
-        <i class="fas fa-search"></i>
-    </div>
+<div class="search-icon">
 
-    <div class="cart-icon">
+<i class="fas fa-search"></i>
 
-        <i class="fas fa-shopping-bag"></i>
+</div>
 
-        <span id="cart-count">0</span>
+<div class="cart-icon">
 
-    </div>
+<i class="fas fa-shopping-bag"></i>
 
-    <div class="menu-btn">
+<span id="cart-count">0</span>
 
-        <i class="fas fa-bars"></i>
+</div>
 
-    </div>
+<div class="menu-btn">
+
+<i class="fas fa-bars"></i>
+
+</div>
 
 </div>
 
@@ -76,11 +80,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 </header>
 
+<!-- ================= HERO ================= -->
+
 <section id="home" class="hero">
 
 <div class="hero-overlay"></div>
 
-<img src="images/hero.jpg" alt="Luxury Fashion" class="hero-image">
+<img
+src="images/hero.jpg"
+alt="Luxury Fashion Model"
+class="hero-image">
 
 <div class="hero-content">
 
@@ -118,6 +127,28 @@ Learn More
 
 </section>
 
+<!-- ================= SEARCH ================= -->
+
+<section class="search-section">
+
+<div class="search-container">
+
+<input
+
+type="text"
+
+id="search-input"
+
+placeholder="Search luxury products...">
+
+<i class="fas fa-search"></i>
+
+</div>
+
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+
 <section class="categories">
 
 <h2 class="section-title">
@@ -130,7 +161,7 @@ Featured Categories
 
 <div class="category-card">
 
-<img src="images/hero-2.jpg" alt="Men">
+<img src="images/hero-2.jpg" alt="Men Collection">
 
 <div class="category-content">
 
@@ -144,7 +175,7 @@ Featured Categories
 
 <div class="category-card">
 
-<img src="images/about.jpg" alt="Women">
+<img src="images/about.jpg" alt="Women Collection">
 
 <div class="category-content">
 
@@ -174,6 +205,8 @@ Featured Categories
 
 </section>
 
+<!-- ================= PRODUCTS ================= -->
+
 <section id="collection" class="products">
 
 <h2 class="section-title">
@@ -183,320 +216,403 @@ New Arrivals
 </h2>
 
 <div class="product-grid">
+
 <div class="product-card">
+
     <img src="images/product-1.jpg" alt="Luxury Jacket">
+
     <div class="product-info">
+
         <h3>Luxury Jacket</h3>
+
         <p>$149</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Luxury Jacket"
+                data-price="149">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="product-card">
+
     <img src="images/product-2.jpg" alt="Classic Suit">
+
     <div class="product-info">
+
         <h3>Classic Suit</h3>
+
         <p>$220</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Classic Suit"
+                data-price="220">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="product-card">
+
     <img src="images/product-3.jpg" alt="Designer Hoodie">
+
     <div class="product-info">
+
         <h3>Designer Hoodie</h3>
+
         <p>$89</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Designer Hoodie"
+                data-price="89">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="product-card">
+
     <img src="images/product-4.jpg" alt="Premium Sneakers">
+
     <div class="product-info">
+
         <h3>Premium Sneakers</h3>
+
         <p>$170</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Premium Sneakers"
+                data-price="170">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="product-card">
+
     <img src="images/product-5.jpg" alt="Street Fashion">
+
     <div class="product-info">
+
         <h3>Street Fashion</h3>
+
         <p>$120</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Street Fashion"
+                data-price="120">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="product-card">
+
     <img src="images/product-6.jpg" alt="Luxury Outfit">
+
     <div class="product-info">
+
         <h3>Luxury Outfit</h3>
+
         <p>$260</p>
+
         <div class="product-buttons">
 
-    <a href="#" class="btn-small details-btn">
-        View Details
-    </a>
+            <a href="#" class="btn-small details-btn">
+                View Details
+            </a>
 
-    <button
-        class="btn-small cart-btn"
-        data-name="Luxury Jacket"
-        data-price="149">
+            <button
+                class="btn-small cart-btn"
+                data-name="Luxury Outfit"
+                data-price="260">
 
-        Add to Cart
+                Add to Cart
 
-    </button>
+            </button>
 
-</div>
+        </div>
+
     </div>
+
 </div>
 
 </div>
+
 </section>
+
+<!-- ================= ABOUT ================= -->
 
 <section id="about" class="about">
 
-    <div class="about-image">
-        <img src="images/about.jpg" alt="About Velora">
-    </div>
+<div class="about-image">
 
-    <div class="about-content">
+<img src="images/about.jpg" alt="About Velora">
 
-        <h2>About Velora</h2>
+</div>
 
-        <p>
-            Velora is a premium fashion destination built for people who
-            appreciate timeless elegance, luxury craftsmanship and modern
-            confidence.
-        </p>
+<div class="about-content">
 
-        <p>
-            Every collection is carefully selected to deliver style,
-            comfort and exclusivity for every occasion.
-        </p>
+<h2>About Velora</h2>
 
-        <a href="#collection" class="btn">
-            Explore Collection
-        </a>
+<p>
 
-    </div>
+Velora is a premium fashion destination built for people who appreciate timeless elegance, luxury craftsmanship and modern confidence.
+
+</p>
+
+<p>
+
+Every collection is carefully selected to deliver style, comfort and exclusivity for every occasion.
+
+</p>
+
+<a href="#collection" class="btn">
+
+Explore Collection
+
+</a>
+
+</div>
 
 </section>
+
+<!-- ================= REVIEWS ================= -->
 
 <section id="reviews" class="reviews">
 
-    <h2 class="section-title">
-        Customer Reviews
-    </h2>
+<h2 class="section-title">
 
-    <div class="review-grid">
+Customer Reviews
 
-        <div class="review-card">
-            <h3>★★★★★</h3>
-            <p>
-                "Absolutely premium quality.
-                Better than I expected."
-            </p>
+</h2>
 
-            <span>— Sarah M.</span>
-        </div>
+<div class="review-grid">
 
-        <div class="review-card">
-            <h3>★★★★★</h3>
-            <p>
-                "Luxury feel, fast delivery and
-                excellent customer service."
-            </p>
+<div class="review-card">
 
-            <span>— Daniel A.</span>
-        </div>
+<h3>★★★★★</h3>
 
-        <div class="review-card">
-            <h3>★★★★★</h3>
-            <p>
-                "The outfits look even better in
-                person."
-            </p>
+<p>
 
-            <span>— Jessica K.</span>
-        </div>
+"Absolutely premium quality.
+Better than I expected."
 
-    </div>
+</p>
+
+<span>— Sarah M.</span>
+
+</div>
+
+<div class="review-card">
+
+<h3>★★★★★</h3>
+
+<p>
+
+"Luxury feel, fast delivery and excellent customer service."
+
+</p>
+
+<span>— Daniel A.</span>
+
+</div>
+
+<div class="review-card">
+
+<h3>★★★★★</h3>
+
+<p>
+
+"The outfits look even better in person."
+
+</p>
+
+<span>— Jessica K.</span>
+
+</div>
+
+</div>
 
 </section>
+
+<!-- ================= CONTACT ================= -->
 
 <section id="contact" class="contact">
 
-    <h2 class="section-title">
-        Contact Us
-    </h2>
+<h2 class="section-title">
 
-    <div class="contact-container">
+Contact Us
 
-        <div class="contact-card">
+</h2>
 
-            <i class="fas fa-envelope"></i>
+<div class="contact-container">
 
-            <h3>Email</h3>
+<div class="contact-card">
 
-            <p>hello@velorafashion.com</p>
+<i class="fas fa-envelope"></i>
 
-        </div>
+<h3>Email</h3>
 
-        <div class="contact-card">
+<p>hello@velorafashion.com</p>
 
-            <i class="fab fa-instagram"></i>
+</div>
 
-            <h3>Instagram</h3>
+<div class="contact-card">
 
-            <p>@velorafashion</p>
+<i class="fab fa-instagram"></i>
 
-        </div>
+<h3>Instagram</h3>
 
-        <div class="contact-card">
+<p>@velorafashion</p>
 
-            <i class="fas fa-location-dot"></i>
+</div>
 
-            <h3>Location</h3>
+<div class="contact-card">
 
-            <p>London • Paris • Milan</p>
+<i class="fas fa-location-dot"></i>
 
-        </div>
+<h3>Location</h3>
 
-    </div>
+<p>London • Paris • Milan</p>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- ================= FOOTER ================= -->
+
 <footer>
 
-    <h2>VELORA</h2>
+<h2>VELORA</h2>
 
-    <p>
-        Crafted for people who wear confidence.
-    </p>
+<p>
 
-    <p class="copyright">
-        © 2026 Velora Fashion. All Rights Reserved.
-    </p>
+Crafted for people who wear confidence.
+
+</p>
+
+<p class="copyright">
+
+© 2026 Velora Fashion. All Rights Reserved.
+
+</p>
 
 </footer>
+
+<!-- ================= SHOPPING CART ================= -->
+
 <div class="cart-panel">
 
-    <div class="cart-header">
+<div class="cart-header">
 
-        <h2>Your Cart</h2>
+<h2>Your Cart</h2>
 
-        <button id="close-cart">
-            ✕
-        </button>
+<button id="close-cart">
 
-    </div>
+✕
 
-    <div id="cart-items">
-
-        <p>Your cart is empty.</p>
-
-    </div>
-
-    <div class="cart-footer">
-
-        <h3>
-
-            Total:
-            <span id="cart-total">
-
-                $0
-
-            </span>
-
-        </h3>
-
-        <button class="btn">
-
-            Checkout
-
-        </button>
-
-    </div>
+</button>
 
 </div>
+
+<div id="cart-items">
+
+<p>Your cart is empty.</p>
+
+</div>
+
+<div class="cart-footer">
+
+<h3>
+
+Total:
+<span id="cart-total">$0</span>
+
+</h3>
+
+<button class="btn">
+
+Checkout
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
