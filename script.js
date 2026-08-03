@@ -194,7 +194,36 @@ updateCart();
 
 });
 
-function updateCart(){
+function updateCart() {
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.price;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <h4>${item.name}</h4>
+                <p>$${item.price}</p>
+            </div>
+        `;
+
+    });
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+    }
+
+    cartTotal.textContent = "$" + total;
+
+    cartCount.textContent = cart.length;
+
+}
 
 cartItems.innerHTML="";
 
