@@ -1,0 +1,193 @@
+/* ===========================
+   GOOGLE FONT VARIABLES
+=========================== */
+
+:root{
+    --gold:#d4af37;
+    --black:#0d0d0d;
+    --dark:#161616;
+    --white:#ffffff;
+    --gray:#bdbdbd;
+    --transition:.35s ease;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--black);
+    color:var(--white);
+    overflow-x:hidden;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(10px);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 30px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:50px;
+}
+
+.logo h2{
+    font-family:'Cinzel',serif;
+    color:var(--gold);
+    letter-spacing:2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    color:white;
+    font-weight:500;
+    transition:var(--transition);
+}
+
+.nav-links a:hover{
+    color:var(--gold);
+}
+
+.menu-btn{
+    display:none;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+    height:100vh;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+.hero-image{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+}
+
+.hero-content{
+    position:relative;
+    z-index:5;
+    max-width:750px;
+    padding:20px;
+}
+
+.hero h1{
+    font-family:'Cinzel',serif;
+    font-size:70px;
+    line-height:1.15;
+    color:white;
+}
+
+.hero p{
+    margin:25px 0;
+    color:#ddd;
+    font-size:20px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn,
+.btn-outline{
+    padding:15px 38px;
+    border-radius:40px;
+    transition:.35s;
+    font-weight:600;
+}
+
+.btn{
+    background:var(--gold);
+    color:black;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.btn-outline{
+    border:2px solid var(--gold);
+    color:var(--gold);
+}
+
+.btn-outline:hover{
+    background:var(--gold);
+    color:black;
+}
+
+/* ===========================
+   SECTION TITLES
+=========================== */
+
+.section-title{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-size:42px;
+    color:var(--gold);
+    margin-bottom:60px;
+}
