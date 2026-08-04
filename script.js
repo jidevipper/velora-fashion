@@ -196,24 +196,4 @@ function updateCart() {
     cartCount.textContent = "1";
 
 }
-    cart.forEach(item => {
-
-        total += item.price;
-
-        const itemDiv = document.createElement("div");
-
-        itemDiv.className = "cart-item";
-
-        itemDiv.innerHTML = `
-            <h4>${item.name}</h4>
-            <p>$${item.price}</p>
-        `;
-
-        cartItems.appendChild(itemDiv);
-
-    });
-
-    cartTotal.textContent = "$" + total;
-    cartCount.textContent = cart.length;
-
-}
+    
