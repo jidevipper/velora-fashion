@@ -226,9 +226,3 @@ function updateCart() {
     cartCount.textContent = cart.length;
 
 }
-
-    cartTotal.textContent = "$" + total;
-
-    cartCount.textContent = cart.length;
-
-}
