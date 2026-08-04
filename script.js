@@ -192,36 +192,40 @@ updateCart();
 
 });
 
-});
-
 function updateCart() {
 
     cartItems.innerHTML = "";
 
     let total = 0;
 
-    cart.forEach(item => {
+    if (cart.length === 0) {
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotal.textContent = "$0";
+        cartCount.textContent = "0";
+        return;
+    }
+
+    cart.forEach((item) => {
 
         total += item.price;
 
-   const itemDiv = document.createElement("div");
+        const itemDiv = document.createElement("div");
 
-itemDiv.className = "cart-item";
+        itemDiv.className = "cart-item";
 
-itemDiv.innerHTML = `
-<h4>${item.name}</h4>
-<p>$${item.price}</p>
-`;
+        itemDiv.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>$${item.price}</p>
+        `;
 
-cartItems.appendChild(itemDiv);
+        cartItems.appendChild(itemDiv);
 
     });
 
-    if (cart.length === 0) {
+    cartTotal.textContent = "$" + total;
+    cartCount.textContent = cart.length;
 
-        cartItems.innerHTML = "<p>Your cart is empty.</p>";
-
-    }
+}
 
     cartTotal.textContent = "$" + total;
 
