@@ -106,3 +106,112 @@ navItems.forEach(link => {
     });
 
 });
+/* ===========================
+   SEARCH ICON
+=========================== */
+
+const searchIcon = document.querySelector(".search-icon");
+
+if (searchIcon) {
+
+    searchIcon.addEventListener("click", () => {
+
+        alert("Search feature coming soon!");
+
+    });
+
+}
+
+/* ===========================
+   SHOPPING CART
+=========================== */
+
+const cartIcon = document.querySelector(".cart-icon");
+const cartPanel = document.querySelector(".cart-panel");
+const closeCart = document.getElementById("close-cart");
+
+const cartButtons = document.querySelectorAll(".cart-btn");
+
+const cartItems = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
+const cartCount = document.getElementById("cart-count");
+
+let cart = [];
+
+if (cartIcon) {
+
+    cartIcon.addEventListener("click", () => {
+
+        cartPanel.classList.add("active");
+
+    });
+
+}
+
+if (closeCart) {
+
+    closeCart.addEventListener("click", () => {
+
+        cartPanel.classList.remove("active");
+
+    });
+
+}
+
+cartButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const name = button.dataset.name;
+        const price = Number(button.dataset.price);
+
+        cart.push({
+            name,
+            price
+        });
+
+        updateCart();
+
+    });
+
+});
+
+function updateCart() {
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+        cartTotal.textContent = "$0";
+
+        cartCount.textContent = "0";
+
+        return;
+
+    }
+
+    cart.forEach(item => {
+
+        total += item.price;
+
+        const itemDiv = document.createElement("div");
+
+        itemDiv.className = "cart-item";
+
+        itemDiv.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>$${item.price}</p>
+        `;
+
+        cartItems.appendChild(itemDiv);
+
+    });
+
+    cartTotal.textContent = "$" + total;
+    cartCount.textContent = cart.length;
+
+}
