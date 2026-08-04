@@ -180,22 +180,22 @@ cartButtons.forEach(button => {
 
 function updateCart() {
 
-    cartItems.innerHTML = "";
+    cartItems.innerHTML = `
+        <div style="
+            color:black;
+            padding:20px;
+            border:2px solid red;
+            background:yellow;
+        ">
+            <h2>TEST ITEM</h2>
+            <p>This should be visible.</p>
+        </div>
+    `;
 
-    let total = 0;
+    cartTotal.textContent = "$999";
+    cartCount.textContent = "1";
 
-    if (cart.length === 0) {
-
-        cartItems.innerHTML = "<p>Your cart is empty.</p>";
-
-        cartTotal.textContent = "$0";
-
-        cartCount.textContent = "0";
-
-        return;
-
-    }
-
+}
     cart.forEach(item => {
 
         total += item.price;
