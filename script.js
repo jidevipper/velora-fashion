@@ -191,7 +191,7 @@ price
 updateCart();
 
 });
-
+});
 function updateCart() {
 
     cartItems.innerHTML = "";
