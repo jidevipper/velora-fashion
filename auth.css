@@ -1,0 +1,111 @@
+/* ===========================
+   AUTH PAGES
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0d0d0d;
+    color:#fff;
+}
+
+.login-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85));
+}
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    background:#181818;
+    padding:45px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+    animation:fadeIn .7s ease;
+}
+
+.login-card h1{
+    font-family:'Cinzel',serif;
+    color:#d4af37;
+    margin-bottom:10px;
+    letter-spacing:3px;
+}
+
+.login-card p{
+    color:#bbb;
+    margin-bottom:30px;
+}
+
+.input-box{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-box i{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#d4af37;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:none;
+    border-radius:12px;
+    background:#262626;
+    color:#fff;
+    font-size:15px;
+}
+
+.input-box input:focus{
+    outline:2px solid #d4af37;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#d4af37;
+    color:#000;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.login-card a{
+    color:#d4af37;
+    text-decoration:none;
+}
+
+.login-card a:hover{
+    text-decoration:underline;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
