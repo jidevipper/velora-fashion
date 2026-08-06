@@ -10,14 +10,39 @@ export default function AccountPage() {
   const { user, loading, signOut } = useAuth();
 
   const handleSignOut = () => {
-    signOut();
+    void signOut();
     router.push("/login");
   };
 
   return (
     <main className="account-page">
       {loading ? null : user ? (
-        <div className="account-card">
+        <div className="account-layout">
+          <nav className="account-menu">
+            <Link href="/account" className="account-menu-link active">
+              My Account
+            </Link>
+            <Link href="/orders" className="account-menu-link">
+              My Orders
+            </Link>
+            <Link href="/wishlist" className="account-menu-link">
+              Wishlist
+            </Link>
+            <Link href="/addresses" className="account-menu-link">
+              Addresses
+            </Link>
+            <Link href="/payment-methods" className="account-menu-link">
+              Payment Methods
+            </Link>
+            <Link href="/settings" className="account-menu-link">
+              Settings
+            </Link>
+            <button className="account-menu-link logout" onClick={handleSignOut}>
+              <i className="fas fa-sign-out-alt" /> Logout
+            </button>
+          </nav>
+
+          <div className="account-card">
           <div className="account-avatar">
             {user.picture ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -55,10 +80,8 @@ export default function AccountPage() {
             <Link href="/" className="btn-outline">
               Continue Shopping
             </Link>
-            <button className="btn btn-ghost" onClick={handleSignOut}>
-              Sign Out
-            </button>
           </div>
+        </div>
         </div>
       ) : (
         <div className="account-card">

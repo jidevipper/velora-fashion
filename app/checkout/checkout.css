@@ -310,6 +310,25 @@
     width:auto;
 }
 
+.checkout-success-sub{
+    font-size:16px;
+}
+
+.checkout-order-number{
+    font-size:18px;
+}
+
+.checkout-success-track{
+    color:#999 !important;
+    font-size:14px;
+}
+
+.checkout-success-countdown{
+    margin-top:25px;
+    color:#777;
+    font-size:13px;
+}
+
 .checkout-empty .btn{
     display:inline-block;
     margin-top:20px;

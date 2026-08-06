@@ -1,26 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import { products } from "@/app/data/products";
+import {
+  generateOrderId,
+  saveOrder,
+  type Order,
+} from "@/app/lib/orders";
 import "./checkout.css";
-
-export type PlacedOrder = {
-  number: string;
-  date: string;
-  items: { id: number; name: string; price: number; qty: number }[];
-  total: number;
-  email: string;
-  name: string;
-  address: string;
-  city: string;
-  postal: string;
-  country: string;
-};
-
-const ORDERS_KEY = "velora-orders";
 
 const initialForm = {
   email: "",
@@ -36,11 +27,26 @@ const initialForm = {
 };
 
 export default function CheckoutForm() {
+  const router = useRouter();
   const { items, total, clearCart } = useCart();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState<string[]>([]);
   const [placing, setPlacing] = useState(false);
-  const [confirmation, setConfirmation] = useState<PlacedOrder | null>(null);
+  const [confirmation, setConfirmation] = useState<Order | null>(null);
+  const [countdown, setCountdown] = useState(8);
+
+  useEffect(() => {
+    if (!confirmation) return;
+    const timer = window.setInterval(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [confirmation]);
+
+  useEffect(() => {
+    if (!confirmation || countdown > 0) return;
+    router.push("/orders");
+  }, [confirmation, countdown, router]);
 
   const set = (field: keyof typeof initialForm) => (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -83,28 +89,22 @@ export default function CheckoutForm() {
 
     setPlacing(true);
     window.setTimeout(() => {
-      const order: PlacedOrder = {
-        number: `VLR-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
-        date: new Date().toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
+      const order: Order = {
+        orderId: generateOrderId(),
+        date: new Date().toISOString(),
+        status: "Order Placed",
         items: items.map((item) => ({ ...item })),
         total,
-        ...form,
+        email: form.email,
+        name: form.name,
+        shippingAddress: [form.address, form.city, form.postal, form.country]
+          .filter(Boolean)
+          .join(", "),
+        paymentMethod: `Card ending ${form.cardNumber
+          .replace(/\s/g, "")
+          .slice(-4)}`,
       };
-      try {
-        const existing = JSON.parse(
-          window.localStorage.getItem(ORDERS_KEY) || "[]"
-        ) as PlacedOrder[];
-        window.localStorage.setItem(
-          ORDERS_KEY,
-          JSON.stringify([order, ...existing])
-        );
-      } catch {
-        // ignore storage errors
-      }
+      saveOrder(order);
       clearCart();
       setPlacing(false);
       setConfirmation(order);
@@ -117,33 +117,25 @@ export default function CheckoutForm() {
       <main className="checkout-page">
         <div className="checkout-success">
           <i className="fas fa-circle-check" />
-          <h1>Order Placed!</h1>
-          <p className="checkout-order-number">Order {confirmation.number}</p>
-          <p>
-            Thank you, {confirmation.name.split(" ")[0]}. A confirmation email
-            has been sent to {confirmation.email}.
+          <h1>Payment Successful!</h1>
+          <p className="checkout-success-sub">
+            Thank you for shopping with Velora.
           </p>
-          <div className="checkout-success-items">
-            {confirmation.items.map((item) => (
-              <div className="checkout-success-item" key={item.id}>
-                <span>{item.name}</span>
-                <span>
-                  {item.qty} × ${item.price}
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="checkout-success-total">
-            Total paid: <strong>${confirmation.total}</strong>
+          <p className="checkout-order-number">
+            Order Number: {confirmation.orderId}
           </p>
+          <p className="checkout-success-track">Track your order below.</p>
           <div className="checkout-success-actions">
             <Link href="/orders" className="btn">
-              View My Orders
+              Go to My Orders
             </Link>
             <Link href="/" className="btn-outline">
               Continue Shopping
             </Link>
           </div>
+          <p className="checkout-success-countdown">
+            Redirecting to My Orders in {countdown}s...
+          </p>
         </div>
       </main>
     );
