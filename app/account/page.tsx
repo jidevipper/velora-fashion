@@ -37,6 +37,11 @@ export default function AccountPage() {
             <Link href="/settings" className="account-menu-link">
               Settings
             </Link>
+            {user.role === "admin" && (
+              <Link href="/admin" className="account-menu-link">
+                Admin Panel
+              </Link>
+            )}
             <button className="account-menu-link logout" onClick={handleSignOut}>
               <i className="fas fa-sign-out-alt" /> Logout
             </button>

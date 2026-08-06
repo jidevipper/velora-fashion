@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
+import { useAuth } from "@/app/context/AuthContext";
 import { products } from "@/app/data/products";
 import {
   generateOrderId,
-  saveOrder,
+  saveOrderToDb,
   type Order,
 } from "@/app/lib/orders";
 import "./checkout.css";
@@ -28,6 +29,7 @@ const initialForm = {
 
 export default function CheckoutForm() {
   const router = useRouter();
+  const { user } = useAuth();
   const { items, total, clearCart } = useCart();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState<string[]>([]);
@@ -104,7 +106,7 @@ export default function CheckoutForm() {
           .replace(/\s/g, "")
           .slice(-4)}`,
       };
-      saveOrder(order);
+      void saveOrderToDb(order, user?.id);
       clearCart();
       setPlacing(false);
       setConfirmation(order);

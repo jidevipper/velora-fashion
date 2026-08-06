@@ -8,7 +8,7 @@ import {
   ORDER_STATUSES,
   STATUS_META,
   formatOrderDate,
-  readOrders,
+  readOrdersFromDb,
   type Order,
   type OrderStatus,
 } from "@/app/lib/orders";
@@ -58,7 +58,13 @@ export default function OrdersPage() {
   const [trackOpen, setTrackOpen] = useState<string | null>(null);
 
   useEffect(() => {
-    setOrders(readOrders());
+    let active = true;
+    void readOrdersFromDb().then((orders) => {
+      if (active) setOrders(orders);
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const downloadReceipt = (order: Order) => {

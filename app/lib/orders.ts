@@ -1,3 +1,5 @@
+import { getSupabase } from "@/app/lib/supabase";
+
 export type OrderStatus =
   | "Order Placed"
   | "Processing"
@@ -95,6 +97,41 @@ export function normalizeOrder(raw: unknown): Order {
 }
 
 export function readOrders(): Order[] {
+  return readLocalOrders();
+}
+
+export function saveOrder(order: Order): void {
+  saveLocalOrder(order);
+}
+
+type OrderRow = {
+  id: string;
+  order_id: string;
+  status: string;
+  total: number;
+  items: unknown;
+  shipping_address: string;
+  payment_method: string;
+  email: string;
+  name: string;
+  date: string;
+};
+
+function rowToOrder(row: OrderRow): Order {
+  return {
+    orderId: row.order_id,
+    date: row.date,
+    status: isOrderStatus(row.status) ? row.status : "Order Placed",
+    total: Number(row.total),
+    items: Array.isArray(row.items) ? (row.items as OrderItem[]) : [],
+    shippingAddress: row.shipping_address,
+    paymentMethod: row.payment_method,
+    email: row.email,
+    name: row.name,
+  };
+}
+
+function readLocalOrders(): Order[] {
   try {
     const stored = window.localStorage.getItem(ORDERS_KEY);
     const parsed = stored ? (JSON.parse(stored) as unknown[]) : [];
@@ -104,13 +141,62 @@ export function readOrders(): Order[] {
   }
 }
 
-export function saveOrder(order: Order): void {
+function saveLocalOrder(order: Order): void {
   try {
-    const orders = readOrders();
+    const orders = readLocalOrders();
     window.localStorage.setItem(ORDERS_KEY, JSON.stringify([order, ...orders]));
   } catch {
     // ignore storage errors
   }
+}
+
+/** Save an order to the Supabase database (falls back to localStorage). */
+export async function saveOrderToDb(
+  order: Order,
+  userId?: string
+): Promise<boolean> {
+  const supabase = getSupabase();
+  if (supabase) {
+    const { error } = await supabase.from("orders").insert({
+      user_id: userId || null,
+      order_id: order.orderId,
+      status: order.status,
+      total: order.total,
+      items: order.items,
+      shipping_address: order.shippingAddress,
+      payment_method: order.paymentMethod,
+      email: order.email,
+      name: order.name,
+      date: order.date,
+    });
+    if (!error) return true;
+  }
+  saveLocalOrder(order);
+  return false;
+}
+
+/** Read the user's orders: database first, merged with local copies. */
+export async function readOrdersFromDb(): Promise<Order[]> {
+  const local = readLocalOrders();
+  const supabase = getSupabase();
+  if (!supabase) return local;
+
+  let rows: OrderRow[] = [];
+  try {
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .order("date", { ascending: false });
+    if (!error && data) rows = data as OrderRow[];
+  } catch {
+    rows = [];
+  }
+
+  const merged = new Map<string, Order>();
+  for (const order of [...rows.map(rowToOrder), ...local]) {
+    merged.set(order.orderId, order);
+  }
+  return Array.from(merged.values());
 }
 
 export function generateOrderId(): string {
