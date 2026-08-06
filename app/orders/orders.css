@@ -1,0 +1,156 @@
+/* ===========================
+   ORDERS PAGE
+=========================== */
+
+.orders-page{
+    min-height:100vh;
+    padding:130px 8% 80px;
+    background:#0d0d0d;
+    color:#fff;
+}
+
+.orders-title{
+    font-family:var(--font-cinzel),'Cinzel',serif;
+    color:var(--gold);
+    font-size:42px;
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.orders-list{
+    max-width:820px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.order-card{
+    background:#181818;
+    border-radius:18px;
+    padding:28px;
+    animation:fadeIn .5s ease;
+}
+
+.order-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #262626;
+    padding-bottom:15px;
+    margin-bottom:15px;
+}
+
+.order-card-header h2{
+    font-family:var(--font-cinzel),'Cinzel',serif;
+    font-size:19px;
+    color:#fff;
+    margin-bottom:4px;
+}
+
+.order-card-header p{
+    color:#999;
+    font-size:13px;
+}
+
+.order-status{
+    background:rgba(39,174,96,.15);
+    color:#27ae60;
+    border:1px solid rgba(39,174,96,.4);
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.order-card-item{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px solid #222;
+    color:#ddd;
+    font-size:15px;
+}
+
+.order-card-item:last-child{
+    border-bottom:none;
+}
+
+.order-card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid #262626;
+}
+
+.order-card-footer span{
+    color:#bbb;
+    font-size:14px;
+}
+
+.order-card-footer strong{
+    color:var(--gold);
+    font-size:20px;
+}
+
+.orders-empty{
+    max-width:480px;
+    margin:80px auto 0;
+    background:#181818;
+    border-radius:18px;
+    padding:50px 40px;
+    text-align:center;
+}
+
+.orders-empty i{
+    font-size:60px;
+    color:var(--gold);
+    margin-bottom:20px;
+}
+
+.orders-empty h1{
+    font-family:var(--font-cinzel),'Cinzel',serif;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.orders-empty p{
+    color:#bbb;
+    line-height:1.8;
+    margin-bottom:8px;
+}
+
+.orders-empty .btn{
+    display:inline-block;
+    margin-top:20px;
+}
+
+.orders-back{
+    text-align:center;
+    margin-top:40px;
+}
+
+@media(max-width:900px){
+
+.orders-title{
+    font-size:32px;
+}
+
+.order-card{
+    padding:20px;
+}
+
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
