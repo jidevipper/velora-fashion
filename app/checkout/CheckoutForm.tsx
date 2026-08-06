@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import { useAuth } from "@/app/context/AuthContext";
-import { products } from "@/app/data/products";
+import { useCatalog } from "@/app/context/CatalogContext";
 import {
   generateOrderId,
   saveOrderToDb,
@@ -30,6 +29,7 @@ const initialForm = {
 export default function CheckoutForm() {
   const router = useRouter();
   const { user } = useAuth();
+  const { products } = useCatalog();
   const { items, total, clearCart } = useCart();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState<string[]>([]);
@@ -320,12 +320,8 @@ export default function CheckoutForm() {
             return (
               <div className="checkout-summary-item" key={item.id}>
                 {product && (
-                  <Image
-                    src={product.image}
-                    alt={item.name}
-                    width={52}
-                    height={52}
-                  />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={product.image} alt={item.name} />
                 )}
                 <div className="checkout-summary-info">
                   <h4>{item.name}</h4>

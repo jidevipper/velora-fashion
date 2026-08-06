@@ -9,6 +9,8 @@ import {
   formatOrderDate,
   type OrderStatus,
 } from "@/app/lib/orders";
+import ProductsManager from "@/app/admin/ProductsManager";
+import CollectionsManager from "@/app/admin/CollectionsManager";
 import "./admin.css";
 
 type AdminOrder = {
@@ -30,7 +32,7 @@ type AdminUser = {
   created_at: string;
 };
 
-type Tab = "dashboard" | "orders" | "users";
+type Tab = "dashboard" | "orders" | "products" | "collections" | "users";
 
 function StatCard({
   icon,
@@ -215,6 +217,18 @@ export default function AdminPage() {
           {orders && <span className="admin-tab-count">{orders.length}</span>}
         </button>
         <button
+          className={`admin-tab${tab === "products" ? " active" : ""}`}
+          onClick={() => setTab("products")}
+        >
+          <i className="fas fa-shirt" /> Products
+        </button>
+        <button
+          className={`admin-tab${tab === "collections" ? " active" : ""}`}
+          onClick={() => setTab("collections")}
+        >
+          <i className="fas fa-layer-group" /> Collections
+        </button>
+        <button
           className={`admin-tab${tab === "users" ? " active" : ""}`}
           onClick={() => setTab("users")}
         >
@@ -346,6 +360,10 @@ export default function AdminPage() {
           )}
         </section>
       )}
+
+      {tab === "products" && <ProductsManager />}
+
+      {tab === "collections" && <CollectionsManager />}
 
       {tab === "users" && (
         <section className="admin-section">

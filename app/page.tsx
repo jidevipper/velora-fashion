@@ -1,8 +1,8 @@
 import Image from "next/image";
 import SearchBar from "@/app/components/SearchBar";
 import ProductGrid from "@/app/components/ProductGrid";
+import CategoryGrid from "@/app/components/CategoryGrid";
 import Reveal from "@/app/components/Reveal";
-import { categories } from "@/app/data/categories";
 import hero from "@/public/images/hero.jpg";
 import aboutImg from "@/public/images/about.jpg";
 
@@ -62,23 +62,7 @@ export default function Home() {
       {/* ================= CATEGORIES ================= */}
       <section className="categories" id="categories">
         <h2 className="section-title">Featured Categories</h2>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Reveal key={category.id}>
-              <div className="category-card" id={`category-${category.id}`}>
-                <Image
-                  src={category.image}
-                  alt={`${category.name} Collection`}
-                  sizes="(min-width: 1200px) 28vw, (min-width: 900px) 33vw, 100vw"
-                />
-                <div className="category-content">
-                  <h3>{category.name}</h3>
-                  <p>{category.tagline}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <CategoryGrid />
       </section>
 
       {/* ================= PRODUCTS ================= */}

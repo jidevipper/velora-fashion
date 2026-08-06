@@ -1,30 +1,32 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
 import { useSearch } from "@/app/components/SearchProvider";
-import { products } from "@/app/data/products";
+import { useCatalog } from "@/app/context/CatalogContext";
 
 export default function ProductGrid() {
   const { query } = useSearch();
   const { addItem } = useCart();
+  const { products, loading } = useCatalog();
 
+  const available = products.filter((product) => product.available);
   const filtered = query.trim()
-    ? products.filter((product) =>
+    ? available.filter((product) =>
         product.name.toLowerCase().includes(query.trim().toLowerCase())
       )
-    : products;
+    : available;
+
+  if (loading && products.length === 0) {
+    return <p className="product-grid-loading">Loading collection...</p>;
+  }
 
   return (
     <div className="product-grid">
       {filtered.map((product) => (
         <div className="product-card" key={product.id} id={`product-${product.id}`}>
-          <Image
-            src={product.image}
-            alt={product.name}
-            sizes="(min-width: 1200px) 25vw, (min-width: 900px) 33vw, 100vw"
-          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={product.image} alt={product.name} loading="lazy" />
           <div className="product-info">
             <h3>{product.name}</h3>
             <p>${product.price}</p>

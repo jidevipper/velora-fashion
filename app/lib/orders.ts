@@ -9,7 +9,7 @@ export type OrderStatus =
   | "Cancelled";
 
 export type OrderItem = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   qty: number;
@@ -70,7 +70,7 @@ export function normalizeOrder(raw: unknown): Order {
   const r = (raw ?? {}) as Record<string, unknown>;
   const items = Array.isArray(r.items)
     ? (r.items as Array<Record<string, unknown>>).map((item) => ({
-        id: Number(item.id ?? 0),
+        id: String(item.id ?? ""),
         name: String(item.name ?? "Item"),
         price: Number(item.price ?? 0),
         qty: Number(item.qty ?? 1),

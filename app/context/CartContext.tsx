@@ -11,7 +11,7 @@ import {
 } from "react";
 
 export type CartItem = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   qty: number;
@@ -24,10 +24,10 @@ type CartContextValue = {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
-  addItem: (id: number, name: string, price: number) => void;
-  increment: (id: number) => void;
-  decrement: (id: number) => void;
-  removeItem: (id: number) => void;
+  addItem: (id: string, name: string, price: number) => void;
+  increment: (id: string) => void;
+  decrement: (id: string) => void;
+  removeItem: (id: string) => void;
   clearCart: () => void;
 };
 
@@ -59,7 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
 
-  const addItem = useCallback((id: number, name: string, price: number) => {
+  const addItem = useCallback((id: string, name: string, price: number) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.id === id);
       if (existing) {
@@ -72,7 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsOpen(true);
   }, []);
 
-  const increment = useCallback((id: number) => {
+  const increment = useCallback((id: string) => {
     setItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, qty: item.qty + 1 } : item
@@ -80,7 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
-  const decrement = useCallback((id: number) => {
+  const decrement = useCallback((id: string) => {
     setItems((prev) =>
       prev
         .map((item) =>
@@ -90,7 +90,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
-  const removeItem = useCallback((id: number) => {
+  const removeItem = useCallback((id: string) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
   }, []);
 

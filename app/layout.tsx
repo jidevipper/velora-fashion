@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/app/context/CartContext";
 import { AuthProvider } from "@/app/context/AuthContext";
 import { SearchProvider } from "@/app/components/SearchProvider";
+import { CatalogProvider } from "@/app/context/CatalogContext";
 import SiteChrome from "@/app/components/SiteChrome";
 
 const cinzel = Cinzel({
@@ -41,8 +42,10 @@ export default function RootLayout({
         <CartProvider>
           <AuthProvider>
             <SearchProvider>
-              <SiteChrome />
-              {children}
+              <CatalogProvider>
+                <SiteChrome />
+                {children}
+              </CatalogProvider>
             </SearchProvider>
           </AuthProvider>
         </CartProvider>

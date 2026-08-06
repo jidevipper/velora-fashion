@@ -1,22 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useSearch } from "@/app/components/SearchProvider";
-import { products } from "@/app/data/products";
-import { categories } from "@/app/data/categories";
+import { useCatalog } from "@/app/context/CatalogContext";
 
 export default function SearchBar() {
   const { query, setQuery } = useSearch();
+  const { products, collections } = useCatalog();
   const [focused, setFocused] = useState(false);
 
   const q = query.trim().toLowerCase();
 
   const productMatches = q
-    ? products.filter((p) => p.name.toLowerCase().includes(q))
+    ? products.filter(
+        (p) =>
+          p.available && p.name.toLowerCase().includes(q)
+      )
     : [];
   const categoryMatches = q
-    ? categories.filter(
+    ? collections.filter(
         (c) =>
           c.name.toLowerCase().includes(q) ||
           c.tagline.toLowerCase().includes(q)
@@ -77,12 +79,8 @@ export default function SearchBar() {
                     className="search-result-item"
                     onClick={() => jumpTo(`product-${product.id}`)}
                   >
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={44}
-                      height={44}
-                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={product.image} alt={product.name} />
                     <h4>{product.name}</h4>
                     <p>${product.price}</p>
                   </div>
@@ -99,12 +97,8 @@ export default function SearchBar() {
                     className="search-result-item"
                     onClick={() => jumpTo(`category-${category.id}`)}
                   >
-                    <Image
-                      src={category.image}
-                      alt={category.name}
-                      width={44}
-                      height={44}
-                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={category.image} alt={category.name} />
                     <h4>{category.name}</h4>
                     <span>{category.tagline}</span>
                   </div>
