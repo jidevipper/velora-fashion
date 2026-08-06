@@ -52,6 +52,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const supabase = getSupabase();
     let active = true;
 
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
     const init = async () => {
       const {
         data: { session },
@@ -80,6 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = useCallback(async (name: string, email: string, password: string) => {
     const supabase = getSupabase();
+    if (!supabase) return "Sign-in is not configured. Contact support.";
     const { data, error } = await supabase.auth.signUp({
       email: email.trim().toLowerCase(),
       password,
@@ -94,6 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = useCallback(async (email: string, password: string) => {
     const supabase = getSupabase();
+    if (!supabase) return "Sign-in is not configured. Contact support.";
     const { error } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
       password,
@@ -103,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = useCallback(async () => {
     const supabase = getSupabase();
+    if (!supabase) return "Sign-in is not configured. Contact support.";
     const redirectTo = `${window.location.origin}${window.location.pathname}`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -113,7 +121,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = useCallback(async () => {
     const supabase = getSupabase();
-    await supabase.auth.signOut();
+    await supabase?.auth.signOut();
   }, []);
 
   const value = useMemo<AuthContextValue>(
