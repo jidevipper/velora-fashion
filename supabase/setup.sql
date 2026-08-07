@@ -32,7 +32,7 @@ as $$
   );
 $$;
 
-revoke all on function public.is_admin() from public;
+grant execute on function public.is_admin() to anon, authenticated, service_role;
 
 create policy "profiles_admin_all" on public.profiles
   for all using (public.is_admin());
