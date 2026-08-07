@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { getSupabase } from "@/app/lib/supabase";
 import {
   ORDER_STATUSES,
@@ -55,6 +56,7 @@ function StatCard({
 }
 
 export default function AdminPage() {
+  const router = useRouter();
   const [access, setAccess] = useState<"checking" | "allowed" | "denied">(
     "checking"
   );
@@ -74,7 +76,7 @@ export default function AdminPage() {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        setAccess("denied");
+        router.replace("/admin/login");
         return;
       }
       const { data } = await supabase
@@ -85,7 +87,7 @@ export default function AdminPage() {
       setAccess(data?.role === "admin" ? "allowed" : "denied");
     };
     void check();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (access !== "allowed") return;
@@ -144,6 +146,11 @@ export default function AdminPage() {
     []
   );
 
+  const handleSignOut = useCallback(async () => {
+    await getSupabase()?.auth.signOut();
+    router.replace("/admin/login");
+  }, [router]);
+
   const stats = useMemo(() => {
     const list = orders ?? [];
     const revenue = list
@@ -182,9 +189,17 @@ export default function AdminPage() {
           <i className="fas fa-lock" />
           <h1>Access Denied</h1>
           <p>You do not have permission to view this page.</p>
-          <Link href="/" className="btn">
-            Back to Shop
-          </Link>
+          <div className="admin-denied-actions">
+            <button
+              className="btn btn-outline"
+              onClick={() => void handleSignOut()}
+            >
+              <i className="fas fa-right-from-bracket" /> Sign Out
+            </button>
+            <Link href="/" className="btn">
+              Back to Shop
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -197,9 +212,17 @@ export default function AdminPage() {
           <h1 className="admin-title">Admin Panel</h1>
           <p className="admin-subtitle">VELORA — store management</p>
         </div>
-        <Link href="/" className="btn-outline">
-          <i className="fas fa-arrow-left" /> Back to Shop
-        </Link>
+        <div className="admin-top-actions">
+          <button
+            className="btn-outline"
+            onClick={() => void handleSignOut()}
+          >
+            <i className="fas fa-right-from-bracket" /> Sign Out
+          </button>
+          <Link href="/" className="btn-outline">
+            <i className="fas fa-arrow-left" /> Back to Shop
+          </Link>
+        </div>
       </div>
 
       <nav className="admin-tabs">

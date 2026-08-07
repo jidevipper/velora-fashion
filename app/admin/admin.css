@@ -38,6 +38,36 @@
     color:#bbb;
 }
 
+.admin-denied-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:8px;
+}
+
+.admin-denied-actions .btn{
+    width:auto;
+    padding:12px 22px;
+}
+
+.admin-denied-actions .btn-outline{
+    background:transparent;
+    width:auto;
+    padding:12px 22px;
+    margin-top:0;
+}
+
+.admin-top-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.admin-top-actions .btn-outline{
+    margin-top:0;
+}
+
 .admin-top{
     display:flex;
     justify-content:space-between;

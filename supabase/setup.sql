@@ -17,13 +17,25 @@ alter table public.profiles enable row level security;
 create policy "profiles_select_own" on public.profiles
   for select using (auth.uid() = id);
 
-create policy "profiles_admin_all" on public.profiles
-  for all using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
+-- Admin helper: reads the role WITHOUT re-triggering RLS on
+-- profiles (avoids "infinite recursion detected in policy")
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
   );
+$$;
+
+revoke all on function public.is_admin() from public;
+
+create policy "profiles_admin_all" on public.profiles
+  for all using (public.is_admin());
 
 -- Auto-create a profile when a user signs up
 create or replace function public.handle_new_user()
@@ -77,17 +89,12 @@ create policy "orders_insert_any" on public.orders
 create policy "orders_select_own" on public.orders
   for select using (
     auth.uid() = user_id
-    or email = (select email from auth.users where id = auth.uid())
+    or email = auth.jwt() ->> 'email'
   );
 
 -- Admins can read and update all orders
 create policy "orders_admin_all" on public.orders
-  for all using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  for all using (public.is_admin());
 
 -- ============================================================
 -- Make YOUR account an admin (run after signing in once):
@@ -120,12 +127,7 @@ create policy "products_select_all" on public.products
 
 -- Only admins can add / edit / remove products
 create policy "products_admin_all" on public.products
-  for all using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  for all using (public.is_admin());
 
 -- COLLECTIONS
 create table if not exists public.collections (
@@ -143,12 +145,7 @@ create policy "collections_select_all" on public.collections
   for select using (true);
 
 create policy "collections_admin_all" on public.collections
-  for all using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+  for all using (public.is_admin());
 
 -- ============================================================
 -- SEED DATA (the original Velora catalog)
